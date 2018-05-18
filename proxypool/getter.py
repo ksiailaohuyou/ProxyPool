@@ -30,28 +30,17 @@ class FreeProxyGetter(object, metaclass=ProxyMetaclass):
             proxies.append(proxy)
         return proxies
 
-    def crawl_ip181(self):
-        start_url = 'http://www.ip181.com/'
-        html = get_page(start_url)
-        ip_adress = re.compile('<tr.*?>\s*<td>(.*?)</td>\s*<td>(.*?)</td>')
-        # \s* 匹配空格，起到换行作用
-        re_ip_adress = ip_adress.findall(html)
-        for adress, port in re_ip_adress:
-            result = adress + ':' + port
-            yield result.replace(' ', '')
+    # def crawl_ip181(self):  域名已无效
+    #     start_url = 'http://www.ip181.com/'
+    #     html = get_page(start_url)
+    #     ip_adress = re.compile('<tr.*?>\s*<td>(.*?)</td>\s*<td>(.*?)</td>')
+    #     # \s* 匹配空格，起到换行作用
+    #     re_ip_adress = ip_adress.findall(html)
+    #     for adress, port in re_ip_adress:
+    #         result = adress + ':' + port
+    #         yield result.replace(' ', '')
 
-    def crawl_kuaidaili(self):
-        for page in range(1, 4):
-            # 国内高匿代理
-            start_url = 'https://www.kuaidaili.com/free/inha/{}/'.format(page)
-            html = get_page(start_url)
-            ip_adress = re.compile(
-                '<td data-title="IP">(.*)</td>\s*<td data-title="PORT">(\w+)</td>'
-            )
-            re_ip_adress = ip_adress.findall(html)
-            for adress, port in re_ip_adress:
-                result = adress + ':' + port
-                yield result.replace(' ', '')
+
 
     def crawl_xicidaili(self):
         for page in range(1, 4):
@@ -130,3 +119,18 @@ class FreeProxyGetter(object, metaclass=ProxyMetaclass):
                 for adress, port in zip(re_ip_adress1, re_ip_adress2):
                     adress_port = adress + ':' + port
                     yield adress_port.replace(' ', '')
+
+    def crawl_kuaidaili(self):
+        for page in range(1, 5):
+            # import time
+            # time.sleep(3)
+            # 国内高匿代理
+            start_url = 'https://www.kuaidaili.com/free/inha/{}/'.format(page)
+            html = get_page(start_url)
+            ip_adress = re.compile(
+                '<td data-title="IP">(.*)</td>\s*<td data-title="PORT">(\w+)</td>'
+            )
+            re_ip_adress = ip_adress.findall(html)
+            for adress, port in re_ip_adress:
+                result = adress + ':' + port
+                yield result.replace(' ', '')
