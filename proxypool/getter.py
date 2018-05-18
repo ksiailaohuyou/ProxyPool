@@ -104,21 +104,21 @@ class FreeProxyGetter(object, metaclass=ProxyMetaclass):
                 for adress_port in re_ip_adress:
                     yield adress_port.replace(' ', '')
 
-    def crawl_xroxy(self):
-        for i in ['CN', 'TW']:
-            start_url = 'http://www.xroxy.com/proxylist.php?country={}'.format(
-                i)
-            html = get_page(start_url)
-            if html:
-                ip_adress1 = re.compile(
-                    "title='View this Proxy details'>\s*(.*).*")
-                re_ip_adress1 = ip_adress1.findall(html)
-                ip_adress2 = re.compile(
-                    "title='Select proxies with port number .*'>(.*)</a>")
-                re_ip_adress2 = ip_adress2.findall(html)
-                for adress, port in zip(re_ip_adress1, re_ip_adress2):
-                    adress_port = adress + ':' + port
-                    yield adress_port.replace(' ', '')
+    # def crawl_xroxy(self):
+    #     for i in ['CN', 'TW']:
+    #         start_url = 'http://www.xroxy.com/proxylist.php?country={}'.format(
+    #             i)
+    #         html = get_page(start_url)
+    #         if html:
+    #             ip_adress1 = re.compile(
+    #                 "title='View this Proxy details'>\s*(.*).*")
+    #             re_ip_adress1 = ip_adress1.findall(html)
+    #             ip_adress2 = re.compile(
+    #                 "title='Select proxies with port number .*'>(.*)</a>")
+    #             re_ip_adress2 = ip_adress2.findall(html)
+    #             for adress, port in zip(re_ip_adress1, re_ip_adress2):
+    #                 adress_port = adress + ':' + port
+    #                 yield adress_port.replace(' ', '')
 
     def crawl_kuaidaili(self):
         for page in range(1, 5):
