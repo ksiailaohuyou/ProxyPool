@@ -41,8 +41,9 @@ class ValidityTester(object):
                             print('Valid proxy', proxy)
                 except (ProxyConnectionError, TimeoutError, ValueError):
                     print('Invalid proxy', proxy)
-        except (ServerDisconnectedError, ClientResponseError,ClientConnectorError) as s:
+        except (ServerDisconnectedError, ClientResponseError,ClientConnectorError,aiohttp.client_exceptions.ClientOSError) as s:
             print(s)
+            print(s.message)
             pass
 
     def test(self):

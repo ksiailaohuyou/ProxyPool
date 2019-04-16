@@ -17,4 +17,5 @@ VALID_CHECK_CYCLE = 60
 POOL_LEN_CHECK_CYCLE = 20
 
 # 测试API，用百度来测试
-TEST_API='http://www.baidu.com'
+# TEST_API='http://www.baidu.com'
+TEST_API='https://rong.36kr.com/n/api/index/fund-express?page=1&pageSize=20'
